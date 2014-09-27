@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="shortcut icon" type=text/css href="{{ url_for('static', filename='img/favicon.ico') }}"/>
+    <!-- stylesheet -->
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style_login.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/normalize.css') }}">
+
+    {%- if title %}
+    <title>SARpi - {{title}}</title>
+    {%- else %}
+    <title>SARpi - The Remote Feeder System</title>
+    {%- endif %}
+</head>
+<body>
+    <div id="login">
+        <div class="msg"><img src="{{ url_for('static', filename='img/logo.png') }}"></div>
+
+        <form action=""  method="POST" name="login">
+            {{form.hidden_tag()}}
+
+            <span class="fontawesome-user"></span>
+            {{ form.username(placeholder="Username") }}
+            {% for error in form.errors.username %}
+                <span class="message error">[{{error}}]</span><br>
+            {% endfor %}
+
+            <span class="fontawesome-lock"></span>
+            {{ form.password(placeholder="Password") }}
+            {% for error in form.errors.password %}
+                <span class="message error">[{{error}}]</span><br>
+            {% endfor %}
+            <input type="submit" class="btn" value="Enter"/>
+        </form>
+    </div>
+    {%- include "flash.html" %}
+</body>
+</html>

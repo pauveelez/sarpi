@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content -%}
+    <div class='center' id='btn_feed'>
+        <p>Feed Me!</p>
+    </div>
+
+    <p>Horarios del Dia</p>
+
+    <!-- {% for schedule in schedules %} -->
+        <p>{{schedule.description}} | {{schedule.time_start}} </p>
+    <!-- {% endfor %} -->
+
+    <p>La Mascota es: {{pet.name}}</p>
+    <a href="{{ url_for('reports') }}">Reportes</a>
+
+    {% include "flash.html" %}
+{%- endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content -%}
+    <div class="forms" id="reports">
+        <h2>Reportes</h2>
+        <form action=""  method="POST" id="reports" name="reports">
+            {{form.hidden_tag()}}
+            <fieldset>
+                <p>
+                    {{ form.dateStart.label }}
+                    {{ form.dateStart(id='date') }}
+                    {% for error in form.errors.dateStart %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.dateFinish.label }}
+                    {{ form.dateFinish(id='date') }}
+                    {% for error in form.errors.dateFinish %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.type_report.label }}
+                    {{ form.type_report }}
+                    {% for error in form.errors.type_report %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </p>
+                <p class="input-content">
+                    <input type="submit" class="btn" value="Generar"/>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+    {%- include "flash.html" %}
+{%- endblock %}

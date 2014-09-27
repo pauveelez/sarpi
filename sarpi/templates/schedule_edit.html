@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block header -%}
+
+{%- endblock %}
+{% block content -%}
+
+    {{ dateShedule }}
+    <br>
+
+    <div class="form scheduleSave">
+        <form action=""  method="POST" id="scheduleSave" name="scheduleSave">
+            {{form.hidden_tag()}}
+            <div class="input-content">
+                {{ form.description.label }}
+                {{ form.description }}
+                {% for error in form.errors.description %}
+                    <span class="message error">[{{error}}]</span>
+                {% endfor %}
+            </div>
+            <div class="input-content">
+                {{ form.portion.label }}
+                {{ form.portion }}
+                {% for error in form.errors.portion %}
+                    <span class="message error">[{{error}}]</span>
+                {% endfor %}
+            </div>
+            <div class="input-content">
+                <label>Horas</label>
+                {{ form.hours(id='hours1') }}
+                {% for error in form.errors.hours %}
+                    <span class="message error">[{{error}}]</span>
+                {% endfor %}
+                <div id="add_hour">
+                    <p class="btn special" onclick="add_hour('add_hour')">+</p>
+                    <input type="hidden" name="count" id="count" value="0">
+                </div>
+            </div>
+            <div class="input-content">
+                <input type="submit" class="btn" value="Guardar"/>
+            </div>
+        </form>
+
+    </div>
+
+    {% include "flash.html" %}
+{%- endblock %}
+{% block js-%}
+    <script type="text/javascript" src="{{url_for('static', filename='js/add_select.js')}}"></script>
+{%- endblock %}

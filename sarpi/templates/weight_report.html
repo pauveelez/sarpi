@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content -%}
+    <h2>Historial Pesos - {{pet.name}}</h2>
+
+    <div id="chart_report"></div>
+
+    {% include "flash.html" %}
+{%- endblock %}
+{% block js -%}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['Date', 'Weight'],
+            {% for w in weights %}
+              ['{{w.date_creation}}',  {{w.weight}}],
+            {% endfor %}
+          ]);
+
+          var options = {
+            title: 'Historial Pesos - {{pet.name}}',
+            legend: { position: 'bottom' },
+            backgroundColor: 'transparent',
+            series: {
+                0: { color: '#1c91c0' },
+            },
+            vAxis: {
+                gridlines: {
+                    color: '#A0ABAD'
+                }
+            },
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('chart_report'));
+
+          chart.draw(data, options);
+        }
+    </script>
+{%- endblock %}

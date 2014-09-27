@@ -1,0 +1,97 @@
+<html>
+<head>
+<style>
+    @page {
+        size: letter landscape;
+        margin: 10px;
+
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 10px; width: 777pt; top: 10px; height: 70px;
+        }
+
+        @frame content_frame {          /* Content Frame */
+            left: 10px; width: 777pt; top: 90px; height: 500pt;
+            padding-top: 20px;
+        }
+
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            -pdf-frame-border: 0;
+            left: 10px; width: 777pt; top: 575pt; height: 40px;
+        }
+    }
+
+    h2{
+        color: #3fa9f5;
+        padding-top: 25px;
+        padding-bottom: 5px;
+    }
+
+    body{
+        font-family:  Arial;
+        font-size: 2em;
+        margin: 10px;
+    }
+
+    #header_content{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    #footer_content{
+        margin: 0;
+        text-align: right;
+    }
+
+    #footer_content h3{
+        font-style: italic;
+        font-size: 0.8em;
+        font-weight: normal;
+        padding-top: 12px;
+    }
+
+    .EstiloCabecera{
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .EstiloCeldas{
+        border : 1px solid gray;
+        text-align: center;
+        padding-top: 10px;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+        <h2>SARpi - List Schedule Done</h2>
+    </div>
+
+
+    <!-- HTML Content -->
+    <table class="EstiloTabla" width="100%" cellpadding="4" cellspacing="0">
+      <tr class="EstiloCabecera">
+        <td class="EstiloCabecera">Descripcion</td>
+        <td class="EstiloCabecera">Fecha Horario</td>
+        <td class="EstiloCabecera">Hora Alimentar</td>
+        <td class="EstiloCabecera">Porcion</td>
+      </tr>
+      {% for schedule in schedules %}
+          <tr>
+                <td class="EstiloCeldas">{{schedule.description}}</td>
+                <td class="EstiloCeldas">{{schedule.date_start}}</td>
+                <td class="EstiloCeldas">{{schedule.time_start}}</td>
+                <td class="EstiloCeldas">{{schedule.portion}} seg</td>
+           </tr>
+       {% endfor %}
+    </table>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">
+        <h3>SARpi(c) - By Pauveelez - Time: {{time}}</h3>
+    </div>
+</body>
+</html>
