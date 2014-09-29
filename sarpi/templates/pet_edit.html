@@ -1,39 +1,41 @@
 {% extends "base.html" %}
 
 {% block content -%}
-    <h2>Edit</h2>
+    <div class="u-content">
+        <h2 class="title">Actualiza mis datos</h2>
 
-    <div class="form edit">
-        <form action=""  method="POST" id="editPet" name="editPet" enctype="multipart/form-data">
-            {{form.hidden_tag()}}
-            <div class="input-content">
-                {{ form.name }}
-                {% for error in form.errors.name %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                {{ form.type_pet }}
-                {% for error in form.errors.type_pet %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                {{ form.weight }}
-                {% for error in form.errors.weight %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                {{ form.image }}
-                {% for error in form.errors.image %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                <input type="submit" class="btn" value="Edit"/>
-            </div>
-        </form>
+        <div class="form edit">
+            <form action=""  method="POST" id="editPet" name="editPet" enctype="multipart/form-data">
+                {{form.hidden_tag()}}
+                <div class="input-content">
+                    {{ form.name(class='input', placeholder="¿Cuál es mi nombre?") }}
+                    {% for error in form.errors.name %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    {{ form.type_pet(class='input', placeholder="¿Qué soy?") }}
+                    {% for error in form.errors.type_pet %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    {{ form.weight(class='input', placeholder="¿Cuanto peso?") }}
+                    {% for error in form.errors.weight %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    {{ form.image(class='file') }}
+                    {% for error in form.errors.image %}
+                        <span class="message error">[{{error}}]</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    <input type="submit" class="btn-red" value="Editar"/>
+                </div>
+            </form>
+        </div>
     </div>
 
     {% include "flash.html" %}

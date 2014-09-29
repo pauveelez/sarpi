@@ -1,0 +1,129 @@
++to(320px)
+    .btn
+        height 50px !important
+        line-height 50px !important
+        position relative
+        text-align center
+        width 100%
+        &:before
+            position absolute
+            left 15px
+
+//UI
+[class *= btn][class *= icon]
+    &:before
+        margin-right 5px
+.btn
+    border none
+    border-bottom 5px solid transparent
+    border-radius 10px
+    box-sizing border-box 
+    color white
+    display inline-block
+    font-size 14px
+    font-weight bold
+    height 35px
+    line-height 35px
+    outline 0
+    padding 0px 15px
+    text-decoration none
+    text-transform uppercase
+.btn-full
+    width 100%
+
+.btn-celeste
+    @extends .btn
+    background celeste
+    border-bottom-color celeste_A
+
+.btn-red
+    @extends .btn
+    background rojo
+    border-bottom-color rojo_A
+
+//alerts
+.alert
+    background gray
+    padding 10px 20px
+    position fixed
+    right 10px
+    bottom 10px
+    z-index 9999
+    color white
+    border-radius 10px
+    box-shadow 0 0 10px rgba(black,.5)
+    opacity 0
+    &.is-active
+        animation 3s alert
+    &-info
+        background #1D75F9
+
+@keyframes alert
+    0%
+        opacity 0
+    5% 
+        opacity 1
+    95%
+        opacity 1
+    100%
+        opacity 0
+//errors
+span.error
+    display block
+    text-align left
+    background white
+    color red
+    padding 5px
+    font-size 12px
+
+.input
+    padding 10px
+    border-radius 10px
+    font-size 15px
+    width 100%
+    box-sizing border-box
+    outline 0
+    border 2px solid transparent
+    &:focus 
+        border-color celeste_A
+    &-content
+        margin-bottom 10px
+        position relative
+
+        .error
+            position absolute
+            top 100%
+            z-index 2
+            left 10px
+.file
+    width 100%
+    padding 10px
+    box-sizing border-box
+    outline 0
+    border-radius 10px
+
+    &:after
+        content "Agrega una imagen"
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+        background #2472A4
+        color white
+        outline 0
+        text-align center
+        padding-top 7px
+        cursor pointer
+        border-radius 10px
+.title
+    color celeste_A
+    text-transform uppercase
+    text-align center
+    padding-bottom 5px
+    border-bottom 1px solid celeste
+
+
+.actions
+    a
+        margin-bottom 10px !important
