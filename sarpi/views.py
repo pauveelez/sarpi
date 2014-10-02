@@ -181,7 +181,7 @@ def set_schedule(dateS):
 
     form = ProgramSchedule()
 
-    form.hours.choices = [(hour[0], hour[1]) for hour in choises_hours()]
+    form.hours.choices = [(hour[1], hour[1]) for hour in choises_hours()]
 
     if form.validate_on_submit():
         hourString = request.form['hours']
