@@ -1,37 +1,34 @@
 {% extends "base.html" %}
 
 {% block content -%}
-    <div class="forms" id="reports">
-        <h2>Reportes</h2>
-        <form action=""  method="POST" id="reports" name="reports">
-            {{form.hidden_tag()}}
-            <fieldset>
-                <p>
-                    {{ form.dateStart.label }}
-                    {{ form.dateStart(id='date') }}
+    <div class="u-content">
+        <div class="forms reports">
+            <h2 class="title">Reportes</h2>
+            <form action=""  method="POST" id="reports" name="reports">
+                {{form.hidden_tag()}}
+                <div class="input-content">
+                    {{ form.dateStart(id='date', class='input', placeholder="Fecha Inicio") }}
                     {% for error in form.errors.dateStart %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
-                </p>
-                <p>
-                    {{ form.dateFinish.label }}
-                    {{ form.dateFinish(id='date') }}
+                </div>
+                <div class="input-content">
+                    {{ form.dateFinish(id='date', class='input', placeholder="Fecha Fin") }}
                     {% for error in form.errors.dateFinish %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
-                </p>
-                <p>
+                </div>
+                <div class="input-content">
                     {{ form.type_report.label }}
-                    {{ form.type_report }}
+                    {{ form.type_report(class='input') }}
                     {% for error in form.errors.type_report %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
-                </p>
-                <p class="input-content">
-                    <input type="submit" class="btn" value="Generar"/>
-                </p>
-            </fieldset>
-        </form>
+                </div>
+                <div class="input-content">
+                    <input type="submit" class="btn-red" value="Generar"/>
+                </div>
+            </form>
+        </div>
     </div>
-    {%- include "flash.html" %}
 {%- endblock %}

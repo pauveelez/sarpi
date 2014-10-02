@@ -10,25 +10,25 @@
                 <div class="input-content">
                     {{ form.name(class='input', placeholder="¿Cuál es mi nombre?") }}
                     {% for error in form.errors.name %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
                     {{ form.type_pet(class='input', placeholder="¿Qué soy?") }}
                     {% for error in form.errors.type_pet %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
                     {{ form.weight(class='input', placeholder="¿Cuanto peso?") }}
                     {% for error in form.errors.weight %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
                     {{ form.image(class='file') }}
                     {% for error in form.errors.image %}
-                        <span class="message error">[{{error}}]</span>
+                        <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
@@ -37,6 +37,4 @@
             </form>
         </div>
     </div>
-
-    {% include "flash.html" %}
 {%- endblock %}

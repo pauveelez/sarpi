@@ -1,9 +1,9 @@
 <header class="Header">
     <div class="u-wrapper">
-        <div class="menu">
-            <span class="left"><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/logo.png') }}"></a></span>
+        <div class="Menu">
+            <span class="u-left"><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='img/logo.png') }}"></a></span>
             {% if current_user.is_authenticated() -%}
-                <span class="right"><a href="{{ url_for('pet_data', name = pet.name) }}"><img class="small_circular"  src="{{pet.url_image}}" alt="{{ pet.name }}"></a></span>
+                <span class="u-right"><a href="{{ url_for('pet_data', name = pet.name) }}"><img class="small_circular"  src="{{pet.url_image}}" alt="{{ pet.name }}"></a></span>
             {%- endif %}
         </div>
     </div>

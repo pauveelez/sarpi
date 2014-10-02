@@ -8,11 +8,11 @@
     <!-- stylesheet -->
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/estilos.css') }}">
 
-   
+
     <title>SARpi - {%- if title %}{{title}}{%- else %}The Remote Feeder System{% endif %}</title>
 
     {%- block header %}{%- endblock %}
-    <script src="http://192.168.0.14:35729/livereload.js?snipver=1"></script>
+    <script src="http://192.168.0.21:35729/livereload.js?snipver=1"></script>
 </head>
 <body>
     {% if current_user.is_authenticated() -%}
@@ -21,7 +21,7 @@
 
 
     {% block content %}{% endblock %}
-    
+
     {% if current_user.is_authenticated() -%}
         {% include "flash.html" %}
         {% include "footer.html" %}

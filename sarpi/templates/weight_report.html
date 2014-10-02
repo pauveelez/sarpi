@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content -%}
-    <h2>Historial Pesos - {{pet.name}}</h2>
+    <div class="u-content">
+      <h2 class="title">Historial Pesos - {{pet.name}}</h2>
 
-    <div id="chart_report"></div>
+      <div id="chart_report"></div>
+    </div>
 
-    {% include "flash.html" %}
 {%- endblock %}
 {% block js -%}
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -21,8 +22,7 @@
           ]);
 
           var options = {
-            title: 'Historial Pesos - {{pet.name}}',
-            legend: { position: 'bottom' },
+            legend: { position: 'top' },
             backgroundColor: 'transparent',
             series: {
                 0: { color: '#1c91c0' },

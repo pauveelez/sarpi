@@ -3,19 +3,14 @@
 {% block content -%}
     <div class="u-wrapper">
         <div class="u-content">
-            
+
             <div class='u-center' id='btn_feed'>
                 <p>Feed Me!</p>
             </div>
 
-            <p>Horarios del Dia</p>
+            <p class="u-center title-small">Horarios del Dia</p>
 
-            <!-- {% for schedule in schedules %} -->
-                <p>{{schedule.description}} | {{schedule.time_start}} </p>
-            <!-- {% endfor %} -->
-
-            <p>La Mascota es: {{pet.name}}</p>
-            <div class="actions">
+            <div class="u-center actions">
                 <a href="{{ url_for('schedule') }}" class="btn-red icon-calendar">Calendario</a>
                 <a href="{{ url_for('reports') }}" class="btn-red icon-reports">Reportes</a>
             </div>

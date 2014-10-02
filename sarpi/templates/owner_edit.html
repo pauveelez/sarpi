@@ -1,43 +1,45 @@
 {% extends "base.html" %}
 
 {% block content -%}
-    <h2>Actualizar Datos - {{current_user.username}}</h2>
+    <div class="u-content">
+        <h2 class="title">Actualiza tus Datos {{current_user.username}}</h2>
 
-    <div class="form editOwner">
-        <form action=""  method="POST" id="editOwner" name="editOwner">
-            {{form.hidden_tag()}}
-            <div class="input-content">
-                {{ form.name.label }}
-                {{ form.name }}
-                {% for error in form.errors.name %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                {{ form.email.label }}
-                {{ form.email }}
-                {% for error in form.errors.email %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                {{ form.newPassword.label }}
-                {{ form.newPassword }}
-                {% for error in form.errors.newPassword %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                {{ form.confirm.label }}
-                {{ form.confirm }}
-                {% for error in form.errors.confirm %}
-                    <span class="message error">[{{error}}]</span>
-                {% endfor %}
-            </div>
-            <div class="input-content">
-                <input type="submit" class="btn" value="Actualizar"/>
-            </div>
-        </form>
+        <div class="form editOwner">
+            <form action=""  method="POST" id="editOwner" name="editOwner">
+                {{form.hidden_tag()}}
+                <div class="input-content">
+                    {{ form.name.label }}
+                    {{ form.name(class='input', placeholder="¿Cuál es tu nombre?") }}
+                    {% for error in form.errors.name %}
+                        <span class="message error">{{error}}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    {{ form.email.label }}
+                    {{ form.email(class='input', placeholder="¿Cuál es tu email?") }}
+                    {% for error in form.errors.email %}
+                        <span class="message error">{{error}}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    {{ form.newPassword.label }}
+                    {{ form.newPassword(class='input', placeholder="Cambia tu contraseña") }}
+                    {% for error in form.errors.newPassword %}
+                        <span class="message error">{{error}}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    {{ form.confirm.label }}
+                    {{ form.confirm(class='input', placeholder="Confirma tu nueva contraseña") }}
+                    {% for error in form.errors.confirm %}
+                        <span class="message error">{{error}}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-content">
+                    <input type="submit" class="btn-red" value="Actualizar"/>
+                </div>
+            </form>
+        </div>
     </div>
 
     {% include "flash.html" %}

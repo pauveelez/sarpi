@@ -18,7 +18,7 @@ function add_hour(divName) {
     var newDiv = document.createElement('div');
     count++;
     var selectHTML = "";
-    selectHTML="<select name='hours"+count+"'>";
+    selectHTML="<select class='input' name='hours"+count+"'>";
     for(i=0; i<choices.length; i=i+1){
         selectHTML+= "<option value='"+choices[i]+"'>"+choices[i]+"</option>";
     }
