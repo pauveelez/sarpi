@@ -1,5 +1,5 @@
 import os
-from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
+from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory, jsonify, json
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from sarpi import sarpi, db, lm
 from forms import LoginForm, EditFormPet, EditFormOwner, ProgramSchedule, CreateReport
@@ -62,23 +62,56 @@ def logout():
 @login_required
 def index():
     today = date.today()
-    owner = g.owner
+    # owner = g.owner
     pet = Pet.query.get(1)
-    schedules_today = Schedule.query.filter_by(date_start = today).order_by(Schedule.time_start)
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    schedules_today = Schedule.query.filter(Schedule.date_start == today).filter_by(state = 'to_do').order_by(Schedule.time_start)
+
+    json_results = []
+    for schedule in schedules_today:
+        date_s = schedule.date_start.strftime("%d-%m-%Y")
+        time_s = schedule.time_start.strftime('%H:%M:00')
+        d = {'description': schedule.description,
+           'date_start': date_s,
+           'time_start': time_s,
+           'state': schedule.state,
+            }
+        json_results.append(d)
+
+    # schedules_json = jsonify(schedules=json_results)
+    schedules_json = json.dumps(json_results)
 
     return render_template('index.html',
         title = 'Home',
         time = time,
-        schedules = schedules_today,
+        schedules = schedules_json,
         pet = pet)
+
+@sarpi.route('/data')
+def data():
+    schedules_to_do = Schedule.query.filter_by(state = 'to_do').order_by(Schedule.date_start)
+
+    json_results = []
+    for schedule in schedules_to_do:
+        date_s = schedule.date_start.strftime("%d-%m-%Y")
+        time_s = schedule.time_start.strftime('%H:%M:00')
+        d = {'description': schedule.description,
+           'date_start': date_s,
+           'time_start': time_s,
+           'portion': schedule.portion,
+           'state': schedule.state,
+            }
+        json_results.append(d)
+
+    # return json.dumps(json_results)
+    return jsonify(schedules=json_results)
 
 @sarpi.route('/pet/<name>')
 @login_required
 def pet_data(name):
     pet = Pet.query.filter_by(name = name).first_or_404()
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     weight = PetWeight.query.filter_by(pet_id = pet.id).order_by(PetWeight.date_creation.desc()).first_or_404()
 
@@ -93,7 +126,7 @@ def pet_data(name):
 @login_required
 def pet_data_edit(name):
     pet = Pet.query.filter_by(name = name).first_or_404()
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
     petWeight = PetWeight.query.filter_by(pet_id = pet.id).order_by(PetWeight.date_creation.desc()).first_or_404()
 
     form = EditFormPet()
@@ -133,7 +166,7 @@ def pet_data_edit(name):
 @login_required
 def owner_edit():
     pet = Pet.query.get(1)
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     form = EditFormOwner()
 
@@ -163,7 +196,7 @@ def owner_edit():
 @login_required
 def schedule():
     pet = Pet.query.get(1)
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     return render_template('schedule.html',
         pet = pet,
@@ -174,7 +207,7 @@ def schedule():
 @login_required
 def set_schedule(dateS):
     pet = Pet.query.get(1)
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     dateShedule = datetime.strptime(dateS, '%Y-%m-%d').date()
     dateShow = dateShedule.strftime('%d %B %Y')
@@ -220,7 +253,7 @@ def set_schedule(dateS):
 @login_required
 def reports():
     pet = Pet.query.get(1)
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     form = CreateReport()
 
@@ -243,7 +276,7 @@ def reports():
 @sarpi.route('/createpdf/<dateS>/<dateF>')
 @login_required
 def createpdf(dateS, dateF):
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     dateStart = datetime.strptime(dateS, '%Y-%m-%d').date()
     dateFinish = datetime.strptime(dateF, '%Y-%m-%d').date()
@@ -260,7 +293,7 @@ def createpdf(dateS, dateF):
 @login_required
 def weight_report(dateS, dateF):
     pet = Pet.query.get(1)
-    time = datetime.now().strftime("%d-%m-%y | %H:%M")
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
     dateStart = datetime.strptime(dateS, '%Y-%m-%d').date()
     dateFinish = datetime.strptime(dateF, '%Y-%m-%d').date()
