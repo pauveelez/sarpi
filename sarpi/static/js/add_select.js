@@ -1,5 +1,5 @@
 var choices = [];
-    choices = ['']
+    choices = [''];
 
 var count = 0;
 
@@ -24,7 +24,11 @@ function add_hour(divName) {
     }
     selectHTML += "</select>";
     newDiv.innerHTML= selectHTML;
-    document.getElementById(divName).appendChild(newDiv);
+    // document.getElementById(divName).appendChild(newDiv);
+
+    var div=document.getElementById(divName);
+    div.insertBefore(newDiv, div.firstChild);
+
     var elem = document.getElementById("count");
     elem.value = ""+count;
 }
