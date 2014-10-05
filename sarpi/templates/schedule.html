@@ -1,9 +1,43 @@
 {% extends "base.html" %}
 
-{% block content -%}
 
-<div class="">
-    <input type="date" />
+
+{% block js %}
+<script>
+    var events = {
+      "2014-10-30": {},
+      "2014-10-26": {}, 
+      "2014-10-03": {}, 
+      "2014-10-12": {}
+  };
+</script>
+<script src="{{ url_for('static', filename='js/responsive-calendar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/schedule.js') }}"></script>
+{% endblock %}
+
+{% block content -%}
+<div class="Schedule" id="Schedule">
+    <div class="u-wrapper Schedule-container">
+        <div class="responsive-calendar">
+            <div class="controls u-clearfix">
+                <a data-go="prev"><div class="Schedule-btnLeft"><</div></a>
+                <h4><span data-head-year></span> <span data-head-month></span></h4>
+                <a data-go="next"><div class="Schedule-btnRight">></div></a>
+            </div>
+            <div class="Schedule-days">
+              <div class="day header">Lunes</div>
+              <div class="day header">Martes</div>
+              <div class="day header">Miercoles</div>
+              <div class="day header">Jueves</div>
+              <div class="day header">Viernes</div>
+              <div class="day header">Sábado</div>
+              <div class="day header">Domingo</div>
+            </div>
+            <div class="days" data-group="days">
+              
+            </div>
+          </div>
+    </div>
 </div>
 
     {% include "flash.html" %}

@@ -1,0 +1,83 @@
+.Schedule
+  margin-top 20px
+  &-btnLeft
+    color #36A0E2
+    float left
+    margin-left 10px
+  &-btnRight
+    color #36A0E2
+    float right
+    margin-right 10px
+  &-container
+    background-color white
+    padding 0
+  &-days
+    background-color #F9F9F9
+  .badge
+    display none
+  .controls
+    padding 10px 0
+    background-color #F9F9F9
+    
+  
+.responsive-calendar
+  .controls
+    text-align center
+    a
+      cursor pointer
+    h4
+      display inline
+  .day
+    display inline-block
+    position relative
+    font-size 14px
+    width 14.285714285714286%
+    text-align center
+    padding 5px 0
+    a
+      color #000000
+      display block
+      cursor pointer
+      padding 20% 0 20% 0
+      &:hover
+        background-color #eee
+        text-decoration none
+    &.header
+      border-bottom 1px #E3E3E3 solid
+    &.active
+      a
+        background-color #1d86c8
+        color #ffffff
+        &:hover
+          background-color #36a0e2
+      .not-current
+        background-color #8fcaef
+        color #ffffff
+        &:hover
+          background-color #bcdff5
+    &.not-current
+      a
+        color #ddd
+    .badge
+      position absolute
+      top 2px
+      right 2px
+      z-index 1
+
+.responsive-calendar .day-headers,
+.responsive-calendar .days
+  font-size 0
+
+
++to(767px)
+  .Schedule
+    margin 0
+    .day
+      &.active
+        a
+          border-radius 50%
+          width 30px
+          height 30px
+          line-height 30px
+          padding 0
+          margin 0 auto
