@@ -8,9 +8,17 @@
                 <p>Feed Me!</p>
             </div>
 
-            <p class="u-center title-small">Horarios del Dia</p>
-            <div class="schedules_today"></div>
-
+            <p class="u-center title-small">Horas de Alimentacion del Dia</p>
+            <div class="u-center schedules_today">
+                {% if schedules is defined  %}
+                    {% for s in schedules %}
+                        <span class="icon-clock">{{s.time_start}}</span>
+                    {% endfor %}
+                {% else %}
+                    <p>No hay horarios Programados</p>
+                {% endif %}
+            </div>
+            <br>
             <div class="u-center actions">
                 <a href="{{ url_for('schedule') }}" class="btn-red icon-calendar">Calendario</a>
                 <a href="{{ url_for('reports') }}" class="btn-red icon-reports">Reportes</a>
@@ -22,6 +30,8 @@
 
 {% block js %}
 <script>
-
+{% if schedules is defined  %}
+    var schedules = {{schedules|tojson|safe}};
+{% endif %}
 </script>
 {% endblock %}

@@ -19,7 +19,7 @@
                     {% endfor %}
                 </div>
                 <div class="input-content">
-                    {{ form.type_report.label }}
+                    {{ form.type_report.label(class="title-small") }}
                     {{ form.type_report(class='input') }}
                     {% for error in form.errors.type_report %}
                         <span class="message error">{{error}}</span>

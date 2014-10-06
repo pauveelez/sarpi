@@ -8,28 +8,24 @@
             <form action=""  method="POST" id="editOwner" name="editOwner">
                 {{form.hidden_tag()}}
                 <div class="input-content">
-                    {{ form.name.label }}
                     {{ form.name(class='input', placeholder="¿Cuál es tu nombre?") }}
                     {% for error in form.errors.name %}
                         <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
-                    {{ form.email.label }}
                     {{ form.email(class='input', placeholder="¿Cuál es tu email?") }}
                     {% for error in form.errors.email %}
                         <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
-                    {{ form.newPassword.label }}
                     {{ form.newPassword(class='input', placeholder="Cambia tu contraseña") }}
                     {% for error in form.errors.newPassword %}
                         <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
-                    {{ form.confirm.label }}
                     {{ form.confirm(class='input', placeholder="Confirma tu nueva contraseña") }}
                     {% for error in form.errors.confirm %}
                         <span class="message error">{{error}}</span>
