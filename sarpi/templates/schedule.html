@@ -4,12 +4,12 @@
 
 {% block js %}
 <script>
-    var events = {
-      "2014-10-30": {},
-      "2014-10-26": {}, 
-      "2014-10-03": {}, 
-      "2014-10-12": {}
-  };
+    var data =  [
+    {"date_start": "2014-10-01", "description": "hola", "time_start": "06:00:00"}, 
+    {"date_start": "2014-10-05", "description": "Paula", "time_start": "01:30:00"}, 
+    {"date_start": "2014-10-10", "description": "Paula2", "time_start": "14:30:00"}, 
+    {"date_start": "2014-10-10", "description": "Leonidas", "time_start": "02:50:00"}, 
+    {"date_start": "2014-10-16", "description": "Leo", "time_start": "08:50:00"}];
 </script>
 <script src="{{ url_for('static', filename='js/responsive-calendar.js') }}"></script>
 <script src="{{ url_for('static', filename='js/schedule.js') }}"></script>
@@ -19,10 +19,17 @@
 <div class="Schedule" id="Schedule">
     <div class="u-wrapper Schedule-container">
         <div class="responsive-calendar">
-            <div class="controls u-clearfix">
-                <a data-go="prev"><div class="Schedule-btnLeft"><</div></a>
-                <h4><span data-head-year></span> <span data-head-month></span></h4>
-                <a data-go="next"><div class="Schedule-btnRight">></div></a>
+            <div class="Schedule-controls u-clearfix">
+                <div class="Schedule-month">
+                    <a data-go="prev" class="icon-arrow-left Schedule-button"></a>
+                    <h4 class="Schedule-label"><span data-head-month></span></h4>
+                    <a data-go="next" class="icon-arrow-right Schedule-button"></a>
+                </div>
+                <div class="Schedule-year">
+                    <a class="icon-arrow-left Schedule-button Schedule-year_" id="year-prev"></a>
+                    <h4 class="Schedule-label"><span data-head-year></span></h4>
+                    <a class="icon-arrow-right Schedule-button Schedule-year_" id="year-next"></a>
+                </div>
             </div>
             <div class="Schedule-days">
               <div class="day header">Lunes</div>
@@ -37,6 +44,16 @@
               
             </div>
           </div>
+    </div>
+    <div class="u-wrapper">
+        <div class="Schedule-details is-inactive u-clearfix" id="details">
+            <h2 class="title" id="details-title"></h2>
+            <h3 class="title-small" id="details-description"></h3>
+            <ul class="Schedule-list" id="details-list">
+                
+            </ul>
+            <a href="#" class="u-right btn-red icon-paw" id="details-edit">Editar</a>
+        </div>
     </div>
 </div>
 

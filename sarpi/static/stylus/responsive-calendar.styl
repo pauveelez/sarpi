@@ -1,24 +1,53 @@
 .Schedule
   margin-top 20px
-  &-btnLeft
-    color #36A0E2
-    float left
-    margin-left 10px
-  &-btnRight
-    color #36A0E2
-    float right
-    margin-right 10px
+  
+  &-button
+    color celeste_A
+    font-size 30px
+    display inline-block
+  &-label
+    display inline-block
+    font-size 22px
+    font-weight 300
+    line-height 0
   &-container
     background-color white
     padding 0
+  &-year
+    float right
+  &-month
+    float left
   &-days
     background-color #F9F9F9
   .badge
     display none
-  .controls
-    padding 10px 0
+  &-controls
+    padding 10px 10px
     background-color #F9F9F9
-    
+    > div > *
+      vertical-align middle
+  &-list
+    padding-left 0
+    li
+      list-style none
+      margin-bottom 5px
+      
+      &:before
+        content ""
+        display inline-block
+        width 10px
+        height 10px 
+        background-color celeste_A
+        border-radius 50%
+        margin-right 5px
+  &-details
+    &.is-inactive
+      visibility hidden
+      opacity 0
+      transition .3s
+    &.is-active 
+      opacity 1
+      visibility visible
   
 .responsive-calendar
   .controls
@@ -33,7 +62,7 @@
     font-size 14px
     width 14.285714285714286%
     text-align center
-    padding 5px 0
+    // padding 5px 0
     a
       color #000000
       display block
@@ -46,12 +75,12 @@
       border-bottom 1px #E3E3E3 solid
     &.active
       a
-        background-color #1d86c8
+        background-color celeste_A
         color #ffffff
         &:hover
-          background-color #36a0e2
+          background-color celeste_A
       .not-current
-        background-color #8fcaef
+        background-color celeste
         color #ffffff
         &:hover
           background-color #bcdff5
