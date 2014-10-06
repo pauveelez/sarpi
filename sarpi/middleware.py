@@ -22,7 +22,7 @@ def choises_hours():
     count = 1
     hours = []
     hours.append('0 ')
-    for i in range(25):
+    for i in range(24):
         for j in range(6):
             h = (str(count), str(i)+':'+str(j)+'0')
             hours.append(h)

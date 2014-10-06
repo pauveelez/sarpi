@@ -4,7 +4,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 # Se usan para el login
 from flask.ext.login import LoginManager
 # from flask.ext.mail import Mail
-from config import basedir, ADMINS
+from config import basedir
 
 # Crea un objeto de clase Flask
 sarpi = Flask(__name__)

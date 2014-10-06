@@ -13,11 +13,21 @@ from config import UPLOAD_FOLDER, PDF_FOLDER, PDF_DOWNLOAD
 #Error Handlers
 @sarpi.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    pet = Pet.query.get(1)
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
+    return render_template('404.html',
+        title = 'Page not Found',
+        time = time,
+        pet = pet), 404
 
 @sarpi.errorhandler(500)
 def internal_server_error(e):
-    return render_template('500.html'), 500
+    pet = Pet.query.get(1)
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
+    return render_template('500.html',
+        title = 'Internal Server Error',
+        time = time,
+        pet = pet), 500
 
 # Login
 @lm.user_loader
@@ -62,7 +72,6 @@ def logout():
 @login_required
 def index():
     today = date.today()
-    # owner = g.owner
     pet = Pet.query.get(1)
     time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
@@ -70,43 +79,29 @@ def index():
 
     json_results = []
     for schedule in schedules_today:
-        date_s = schedule.date_start.strftime("%d-%m-%Y")
-        time_s = schedule.time_start.strftime('%H:%M:00')
-        d = {'description': schedule.description,
-           'date_start': date_s,
-           'time_start': time_s,
-           'state': schedule.state,
+        date_s = schedule.date_start.strftime("%Y-%m-%d")
+        time_s = schedule.time_start.strftime('%H:%M')
+        d = {'date_start': date_s,
+           'time_start': time_s
             }
         json_results.append(d)
 
     # schedules_json = jsonify(schedules=json_results)
-    schedules_json = json.dumps(json_results)
+    # schedules_json = json.dumps(json_results)
 
-    return render_template('index.html',
-        title = 'Home',
-        time = time,
-        schedules = schedules_json,
-        pet = pet)
+    if json_results:
+        return render_template('index.html',
+            title = 'Home',
+            time = time,
+            schedules = json_results,
+            pet = pet)
+    else:
+        return render_template('index.html',
+            title = 'Home',
+            time = time,
+            pet = pet)
 
-@sarpi.route('/data')
-def data():
-    schedules_to_do = Schedule.query.filter_by(state = 'to_do').order_by(Schedule.date_start)
-
-    json_results = []
-    for schedule in schedules_to_do:
-        date_s = schedule.date_start.strftime("%d-%m-%Y")
-        time_s = schedule.time_start.strftime('%H:%M:00')
-        d = {'description': schedule.description,
-           'date_start': date_s,
-           'time_start': time_s,
-           'portion': schedule.portion,
-           'state': schedule.state,
-            }
-        json_results.append(d)
-
-    # return json.dumps(json_results)
-    return jsonify(schedules=json_results)
-
+#Datos de la mascota y el usuario
 @sarpi.route('/pet/<name>')
 @login_required
 def pet_data(name):
@@ -192,15 +187,29 @@ def owner_edit():
         time = time,
         form = form)
 
+# Manejo de los Horarios
 @sarpi.route('/schedule', methods = ['GET', 'POST'])
 @login_required
 def schedule():
     pet = Pet.query.get(1)
     time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
+    schedules_to_do = Schedule.query.filter_by(state = 'to_do').order_by(Schedule.date_start)
+
+    json_results = []
+    for schedule in schedules_to_do:
+        date_s = schedule.date_start.strftime("%Y-%m-%d")
+        time_s = schedule.time_start.strftime('%H:%M:00')
+        d = {'description': ''+schedule.description,
+           'date_start': date_s,
+           'time_start': time_s,
+            }
+        json_results.append(d)
+
     return render_template('schedule.html',
         pet = pet,
-        time = time)
+        time = time,
+        schedules = json_results)
 
 
 @sarpi.route('/schedule/<dateS>', methods = ['GET', 'POST'])
@@ -224,7 +233,6 @@ def set_schedule(dateS):
             portion = form.portion.data
             shedule = Schedule(description = description, date_start = dateShedule, time_start = hour, portion = portion, pet_id = pet.id, owner_username = g.owner.username)
             db.session.add(shedule)
-            # flash('Your Schedule have been saved.')
             selectNumber = request.form['count']
             if selectNumber != '0':
                 for i in range(int(selectNumber)):
@@ -234,7 +242,6 @@ def set_schedule(dateS):
                         hour = datetime.strptime(hourString, '%H:%M').time()
                         shedule = Schedule(description = description, date_start = dateShedule, time_start = hour, portion = portion, pet_id = pet.id, owner_username = g.owner.username)
                         db.session.add(shedule)
-                        # flash('Your Schedule have been saved.')
             db.session.commit()
             flash('Your Schedule have been saved.')
         else:
