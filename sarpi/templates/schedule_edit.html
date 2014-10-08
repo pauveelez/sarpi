@@ -21,14 +21,14 @@
                 </div>
                 <div class="input-content">
                     <p class="title-small">Horas de Alimentacion</p>
+                    <div id="add_hour">
+                        <input type="hidden" name="count" id="count" value="0">
+                    </div>
                     {{ form.hours(id='hours1', class='input') }}
                     {% for error in form.errors.hours %}
                         <span class="message error">{{error}}</span>
                     {% endfor %}
-                    <div class="input-content" id="add_hour">
-                        <div>Agrega más horas <p class="btn-celeste pointer" onclick="add_hour('add_hour')">+</p></div>
-                        <input type="hidden" name="count" id="count" value="0">
-                    </div>
+                    <div>Agrega más horas <p class="btn-celeste pointer" onclick="add_hour('add_hour')">+</p></div>
                 </div>
                 <div class="input-content">
                     <input type="submit" class="btn-red" value="Guardar"/>

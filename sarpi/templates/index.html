@@ -1,19 +1,12 @@
 {% extends "base.html" %}
 
 {% block js %}
-{% if schedules is defined  %}
-    <script>
-        var schedules = {{schedules|tojson|safe}};
-    </script>
-{% endif %}
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
 
 {% block content -%}
     <div class="u-wrapper">
         <div class="u-content">
-
-
             <a class="btn-feed" id="btn-feed"><span class="btn--feedText">Feed me!</span></a>
 
             <p class="u-center title-small">Horas de Alimentacion del Dia</p>

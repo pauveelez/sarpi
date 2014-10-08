@@ -1,9 +1,8 @@
 var choices = [];
-    choices = [''];
-
 var count = 0;
 
 function add_hour(divName) {
+    choices = [''];
     for(hour=0;hour < 24;hour++){
         for(j = 0; j < 60; j = j +10){
             if(j < 10){
@@ -18,7 +17,7 @@ function add_hour(divName) {
     var newDiv = document.createElement('div');
     count++;
     var selectHTML = "";
-    selectHTML="<select class='input' name='hours"+count+"'>";
+    selectHTML="<select class='input u-marginBottom' name='hours"+count+"'>";
     for(i=0; i<choices.length; i=i+1){
         selectHTML+= "<option value='"+choices[i]+"'>"+choices[i]+"</option>";
     }
@@ -31,6 +30,8 @@ function add_hour(divName) {
 
     var elem = document.getElementById("count");
     elem.value = ""+count;
+
+    choices.length = 0;
 }
 
 
