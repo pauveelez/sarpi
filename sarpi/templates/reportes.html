@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{%- block header %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.datetimepicker.css') }}">
+{%- endblock %}
+
 {% block content -%}
     <div class="u-content">
         <div class="forms reports">
@@ -7,13 +11,13 @@
             <form action=""  method="POST" id="reports" name="reports">
                 {{form.hidden_tag()}}
                 <div class="input-content">
-                    {{ form.dateStart(id='date', class='input', placeholder="Fecha Inicio") }}
+                    {{ form.dateStart(id='datetimepicker', class='input', placeholder="Fecha Inicio") }}
                     {% for error in form.errors.dateStart %}
                         <span class="message error">{{error}}</span>
                     {% endfor %}
                 </div>
                 <div class="input-content">
-                    {{ form.dateFinish(id='date', class='input', placeholder="Fecha Fin") }}
+                    {{ form.dateFinish(id='datetimepicker1', class='input', placeholder="Fecha Fin") }}
                     {% for error in form.errors.dateFinish %}
                         <span class="message error">{{error}}</span>
                     {% endfor %}
@@ -31,4 +35,20 @@
             </form>
         </div>
     </div>
+{%- endblock %}
+
+{% block js -%}
+<script src="{{ url_for('static', filename='js/jquery.datetimepicker.js') }}"></script>
+<script>
+$(function(){
+    $('#datetimepicker').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d'
+    });
+    $('#datetimepicker1').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d'
+    });
+})
+</script>
 {%- endblock %}

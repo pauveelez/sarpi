@@ -107,7 +107,7 @@ def ajax_feed():
         print 'Holaaaaaaa'+seconds
         return 'here come de code'
 
-    return 'Hi Code for FeedMeNow'
+    return 'Hi Code for FeedMeNow - Nothing to do here'
 
 
 #Datos de la mascota y el usuario
