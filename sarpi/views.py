@@ -1,5 +1,5 @@
 import os
-from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory, jsonify, json
+from flask import render_template, flash, redirect, session, url_for, request, g, send_from_directory
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from sarpi import sarpi, db, lm
 from forms import LoginForm, EditFormPet, EditFormOwner, ProgramSchedule, CreateReport
@@ -86,9 +86,6 @@ def index():
             }
         json_results.append(d)
 
-    # schedules_json = jsonify(schedules=json_results)
-    # schedules_json = json.dumps(json_results)
-
     if json_results:
         return render_template('index.html',
             title = 'Home',
@@ -100,6 +97,17 @@ def index():
             title = 'Home',
             time = time,
             pet = pet)
+
+#FeedmeNow
+@sarpi.route('/ajax_feed', methods = ['GET', 'POST'])
+@login_required
+def ajax_feed():
+    if request.method == 'POST':
+        # Motor Thing
+        return 'here come de code'
+
+    return 'Hi Code for FeedMeNow'
+
 
 #Datos de la mascota y el usuario
 @sarpi.route('/pet/<name>')
@@ -244,9 +252,9 @@ def set_schedule(dateS):
                         db.session.add(shedule)
             db.session.commit()
             flash('Your Schedule have been saved.')
+            return redirect(url_for('schedule'))
         else:
            flash('Debe seleccionar una hora')
-
 
     return render_template('schedule_edit.html',
         title = 'Schedule -'+dateS,
