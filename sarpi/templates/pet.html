@@ -9,7 +9,7 @@
         </div>
 
         <div class="Biografy">
-            <p>Soy un {{pet.type_pet}}, me llamo <a href="{{ url_for('pet_data_edit', name = pet.name) }}">{{pet.name}}</a>, peso: {{petWeight.weight}} kg y soy de: <a href="{{ url_for('owner_edit') }}">{{g.owner.name}}</a></p>
+            <p>Hola, me llamo <a href="{{ url_for('pet_data_edit', name = pet.name) }}">{{pet.name}}</a> y soy un {{pet.type_pet}}. Peso: {{petWeight.weight}} kg y <a href="{{ url_for('owner_edit') }}">{{g.owner.name}}</a> me da un hogar lleno de amor</p>
         </div>
 
 
