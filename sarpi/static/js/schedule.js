@@ -1,7 +1,7 @@
 $(function(){
     var events = {};
     for(i = 0, emp; i < data.length; i++){
-        var emp = data[i]
+        var emp = data[i];
         if(events[ emp.date_start ]){
             events[ emp.date_start ].push(emp);
         }else{
@@ -9,7 +9,7 @@ $(function(){
         }
     }
 
-    console.log(events)
+    // console.log(events)
     var months = [
         "Enero",
         "Febrero",
@@ -23,7 +23,7 @@ $(function(){
         "Octubre",
         "Noviembre",
         "Diciembre"
-    ]
+    ];
     var $details = $('#details');
     var $detailsTitle = $('#details-title');
     var $detailsDescription = $('#details-description');
@@ -95,12 +95,12 @@ $(function(){
         var id = $self.attr('id');
         if(id == "year-next"){
             for(i=0;i<=11;i++){
-                $Schedule.responsiveCalendar('next')
+                $Schedule.responsiveCalendar('next');
             }
         }else{
             for(i=0;i<=11;i++){
-                $Schedule.responsiveCalendar('prev')
+                $Schedule.responsiveCalendar('prev');
             }
         }
-    })
+    });
 });
