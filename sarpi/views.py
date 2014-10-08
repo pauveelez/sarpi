@@ -103,7 +103,8 @@ def index():
 @login_required
 def ajax_feed():
     if request.method == 'POST':
-        # Motor Thing
+        seconds = request.form['seconds']
+        print 'Holaaaaaaa'+seconds
         return 'here come de code'
 
     return 'Hi Code for FeedMeNow'

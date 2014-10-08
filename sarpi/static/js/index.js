@@ -26,13 +26,13 @@ $(function(){
             if(p){
                 time = 0;
                 $counter.text("Feed me!");
-                var data = {'secods':time};
-                var xhr = $.post('/ajax_feed/',data);
+                var data = {'seconds':time};
+                var xhr = $.post('/ajax_feed',data);
                 xhr.done = function(){
                     alert('ajax a funcionado bien');
                     // debugger;
                 };
-                //mandar ajax y resetear el contador 
+                //mandar ajax y resetear el contador
             }else{
                 // dejar el contador como está
             }
