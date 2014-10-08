@@ -27,10 +27,10 @@ $(function(){
                 $counter.text("Feed me!");
                 var data = {'seconds':time};
                 var xhr = $.post('/ajax_feed',data);
-                xhr.done = function(){
+                xhr.done(function(){
                     time = 0;
                     // alert('ajax a funcionado bien');
-                };
+                });
                 //mandar ajax y resetear el contador
             }else{
                 // dejar el contador como está
