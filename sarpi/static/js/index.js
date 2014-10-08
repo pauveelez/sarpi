@@ -24,13 +24,12 @@ $(function(){
                 msg = "segundo";
             var p = confirm("Crear una porcion de: "+time+" "+msg);
             if(p){
-                time = 0;
                 $counter.text("Feed me!");
                 var data = {'seconds':time};
                 var xhr = $.post('/ajax_feed',data);
                 xhr.done = function(){
-                    alert('ajax a funcionado bien');
-                    // debugger;
+                    time = 0;
+                    // alert('ajax a funcionado bien');
                 };
                 //mandar ajax y resetear el contador
             }else{
