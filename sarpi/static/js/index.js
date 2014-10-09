@@ -1,8 +1,8 @@
-$(function(){
+$(document).ready(function(){
     var $button = $('#btn-feed');
     var $counter = $('.btn--feedText');
 
-
+  
     var time = 0;
     var timer;
 
@@ -22,20 +22,30 @@ $(function(){
                 msg = "segundos";
             else
                 msg = "segundo";
-            var p = confirm("Crear una porcion de: "+time+" "+msg);
-            if(p){
-                $counter.text("Feed me!");
-                var data = {'seconds':time};
-                var xhr = $.post('/ajax_feed',data);
-                xhr.done(function(){
-                    time = 0;
-                    // alert('ajax a funcionado bien');
+
+            swal({   
+                title: "",
+                text: "¿Servir una porción de: "+time+" "+msg+"?", 
+                type: "info",
+                cancelButtonText: "Aun no",
+                showCancelButton: true,
+                confirmButtonColor: "#4AA2E9",
+                confirmButtonText: "Claro!" },
+                function(){   
+                    $counter.text("Feed me!");
+                    var data = {'seconds':time};
+                    var xhr = $.post('/ajax_feed',data);
+                    xhr.done(function(){
+                        time = 0;
+                        setTimeout(function(){
+                            swal("Genial", "Estamos sirviendo la comida!", "success");
+                            setTimeout(function(){
+                                $('.confirm').trigger('click');
+                            },2000);
+                        },200);
+
+                    });
                 });
-                //mandar ajax y resetear el contador
-            }else{
-                $counter.text("Feed me!");
-                time = 0;
-            }
         }
     };
     if( navigator.userAgent.match(/Android/i) ||
@@ -54,5 +64,8 @@ $(function(){
         $button.on('mouseup',clean);
       }
 
-
+      $('body').on('click','.cancel',function(){
+            $counter.text("Feed me!");
+            time = 0;
+      });
 });

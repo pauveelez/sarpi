@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sweet-alert.css') }}">
+{% endblock %}
+
 {% block js %}
+<script src="{{ url_for('static', filename='js/sweet-alert.js') }}"></script>
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
 
