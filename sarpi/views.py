@@ -265,30 +265,32 @@ def set_schedule(dateS):
         form = form)
 
 #Cancelar los horarios de una fecha
-@sarpi.route('/schedule_cancel/<dateS>', methods = ['GET', 'POST'])
-@login_required
-def cancel_schedule(dateS):
-    pet = Pet.query.get(1)
-    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
+# Comentado como plan B para eliminar horarios
+# @sarpi.route('/schedule_cancel/<dateS>', methods = ['GET', 'POST'])
+# @login_required
+# def cancel_schedule(dateS):
+#     pet = Pet.query.get(1)
+#     time = datetime.now().strftime("%d-%m-%Y | %H:%M")
 
-    dateShedule = datetime.strptime(dateS, '%Y-%m-%d').date()
-    dateShow = dateShedule.strftime('%d %B %Y')
+#     dateShedule = datetime.strptime(dateS, '%Y-%m-%d').date()
+#     dateShow = dateShedule.strftime('%d %B %Y')
 
-    schedules_cancel = Schedule.query.filter(Schedule.date_start == dateShedule).filter_by(state = 'to_do').order_by(Schedule.time_start)
+#     schedules_cancel = Schedule.query.filter(Schedule.date_start == dateShedule).filter_by(state = 'to_do').order_by(Schedule.time_start)
 
-    if request.method == 'POST':
-        Schedule.query.filter(Schedule.date_start == dateShedule).filter_by(state = 'to_do').delete()
-        db.session.commit()
-        flash('The Schedule of '+dateShow+' have been delete')
-        return redirect(url_for('schedule'))
+#     if request.method == 'POST':
+#         Schedule.query.filter(Schedule.date_start == dateShedule).filter_by(state = 'to_do').delete()
+#         db.session.commit()
+#         flash('The Schedule of '+dateShow+' have been delete')
+#         return redirect(url_for('schedule'))
 
-    return render_template('schedule_cancel.html',
-        title = 'Schedule -'+dateS,
-        pet = pet,
-        time = time,
-        dateShedule = dateShow,
-        schedules = schedules_cancel)
+#     return render_template('schedule_cancel.html',
+#         title = 'Schedule -'+dateS,
+#         pet = pet,
+#         time = time,
+#         dateShedule = dateShow,
+#         schedules = schedules_cancel)
 
+#Cancel Schedule with Ajax
 @sarpi.route('/schedule_ajax', methods = ['GET', 'POST'])
 @login_required
 def schedule_ajax():
@@ -297,7 +299,7 @@ def schedule_ajax():
         dateCancel = datetime.strptime(dateShedule, '%Y-%m-%d').date()
         Schedule.query.filter(Schedule.date_start == dateCancel).filter_by(state = 'to_do').delete()
         db.session.commit()
-        print 'Deleteeeeeeeeeee'
+        print 'The Schedule of '+dateShedule+' have been delete'
         return redirect(url_for('schedule'))
 
     return 'Hi Code for Cancel Schedule - Nothing to do here'
