@@ -33,7 +33,8 @@ $(function(){
                 });
                 //mandar ajax y resetear el contador
             }else{
-                // dejar el contador como está
+                $counter.text("Feed me!");
+                time = 0;
             }
         }
     };

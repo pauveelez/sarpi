@@ -52,7 +52,6 @@ $(function(){
         $detailsTitle.text(scheduleFirst.date_start);
         $detailsDescription.text(scheduleFirst.description);
         $detailsEdit.text("Cancelar");
-        $detailsEdit.attr("href","/schedule_cancel/"+scheduleString);
 
 
         var dayWithZero = self.dataset.day;
