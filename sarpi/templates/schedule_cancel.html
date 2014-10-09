@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content -%}
+
+    <div class="u-content">
+        <h2 class="title"> {{ dateShedule }} </h2>
+
+        <div class="form scheduleSave">
+            <form action=""  method="POST" id="scheduleCancel" name="scheduleCancel">
+                <div class="input-content">
+                    <p class="title-small">Descripcion </p><span>{{schedules[1].description}}</span>
+                    <p class="title-small">Porcion </p><span>{{schedules[1].portion}}</span>
+                </div>
+                <div class="input-content">
+
+                </div>
+                <div class="input-content">
+                    <p class="title-small">Horas de Alimentacion</p>
+                    <div class="">
+                        {% for s in schedules %}
+                            <span class="icon-clock">{{s.time_start}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="input-content">
+                    <input type="submit" class="btn-red" value="Cancelar Horario"/>
+                </div>
+            </form>
+        </div>
+    </div>
+{%- endblock %}
