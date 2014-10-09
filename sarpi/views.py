@@ -264,6 +264,44 @@ def set_schedule(dateS):
         dateShedule = dateShow,
         form = form)
 
+#Cancelar los horarios de una fecha
+@sarpi.route('/schedule_cancel/<dateS>', methods = ['GET', 'POST'])
+@login_required
+def cancel_schedule(dateS):
+    pet = Pet.query.get(1)
+    time = datetime.now().strftime("%d-%m-%Y | %H:%M")
+
+    dateShedule = datetime.strptime(dateS, '%Y-%m-%d').date()
+    dateShow = dateShedule.strftime('%d %B %Y')
+
+    schedules_cancel = Schedule.query.filter(Schedule.date_start == dateShedule).filter_by(state = 'to_do').order_by(Schedule.time_start)
+
+    if request.method == 'POST':
+        Schedule.query.filter(Schedule.date_start == dateShedule).filter_by(state = 'to_do').delete()
+        db.session.commit()
+        flash('The Schedule of '+dateShow+' have been delete')
+        return redirect(url_for('schedule'))
+
+    return render_template('schedule_cancel.html',
+        title = 'Schedule -'+dateS,
+        pet = pet,
+        time = time,
+        dateShedule = dateShow,
+        schedules = schedules_cancel)
+
+@sarpi.route('/schedule_ajax', methods = ['GET', 'POST'])
+@login_required
+def schedule_ajax():
+    if request.method == 'POST':
+        dateShedule = request.form['date']
+        dateCancel = datetime.strptime(dateShedule, '%Y-%m-%d').date()
+        Schedule.query.filter(Schedule.date_start == dateCancel).filter_by(state = 'to_do').delete()
+        db.session.commit()
+        print 'Deleteeeeeeeeeee'
+        return redirect(url_for('schedule'))
+
+    return 'Hi Code for Cancel Schedule - Nothing to do here'
+
 # Creacion de Reportes - Lista en PDF - Grafica de Pesos
 @sarpi.route('/reporte', methods = ['GET', 'POST'])
 @login_required

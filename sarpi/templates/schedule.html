@@ -8,6 +8,7 @@
 </script>
 <script src="{{ url_for('static', filename='js/responsive-calendar.js') }}"></script>
 <script src="{{ url_for('static', filename='js/schedule.js') }}"></script>
+<script src="{{ url_for('static', filename='js/schedule_cancel.js') }}"></script>
 {% endblock %}
 
 {% block content -%}
@@ -51,6 +52,5 @@
         </div>
     </div>
 </div>
-
     {% include "flash.html" %}
 {%- endblock %}

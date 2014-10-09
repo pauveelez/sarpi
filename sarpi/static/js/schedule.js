@@ -52,7 +52,8 @@ $(function(){
         $detailsTitle.text(scheduleFirst.date_start);
         $detailsDescription.text(scheduleFirst.description);
         $detailsEdit.text("Cancelar");
-        $detailsEdit.attr("href","/schedule/"+scheduleFirst.date_start);
+        $detailsEdit.attr("href","/schedule_cancel/"+scheduleString);
+
 
         var dayWithZero = self.dataset.day;
         if (dayWithZero.charAt(0) == '0'){
@@ -66,7 +67,7 @@ $(function(){
       onMonthChange :function (){
         $details.removeClass('is-active');
       },
-      onDayClick : function (events){
+      onDayClick : function (event){
         $detailsList.empty();
         $details.addClass('is-active');
         var self = this;
