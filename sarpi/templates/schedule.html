@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sweet-alert.css') }}">
+{% endblock %}
 
 
 {% block js %}
@@ -9,6 +12,7 @@
 <script src="{{ url_for('static', filename='js/responsive-calendar.js') }}"></script>
 <script src="{{ url_for('static', filename='js/schedule.js') }}"></script>
 <script src="{{ url_for('static', filename='js/schedule_cancel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sweet-alert.js') }}"></script>
 {% endblock %}
 
 {% block content -%}

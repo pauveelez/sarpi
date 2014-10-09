@@ -2,7 +2,7 @@ $(document).ready(function(){
     var $button = $('#btn-feed');
     var $counter = $('.btn--feedText');
 
-  
+
     var time = 0;
     var timer;
 
@@ -14,7 +14,6 @@ $(document).ready(function(){
         timer = setInterval(counter,1000);
     };
     var clean = function(){
-        //reemplazar por una confirmación o un ajax lindo
         clearInterval(timer);
         if(time > 0){
             var msg;
@@ -23,15 +22,15 @@ $(document).ready(function(){
             else
                 msg = "segundo";
 
-            swal({   
+            swal({
                 title: "",
-                text: "¿Servir una porción de: "+time+" "+msg+"?", 
+                text: "¿Servir una porción de: "+time+" "+msg+"?",
                 type: "info",
                 cancelButtonText: "Aun no",
                 showCancelButton: true,
                 confirmButtonColor: "#4AA2E9",
                 confirmButtonText: "Claro!" },
-                function(){   
+                function(){
                     $counter.text("Feed me!");
                     var data = {'seconds':time};
                     var xhr = $.post('/ajax_feed',data);
@@ -45,7 +44,7 @@ $(document).ready(function(){
                         },200);
 
                     });
-                });
+            });
         }
     };
     if( navigator.userAgent.match(/Android/i) ||

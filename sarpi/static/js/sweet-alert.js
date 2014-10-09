@@ -131,11 +131,11 @@
         // Fallback
         var evt = document.createEvent('MouseEvents');
         evt.initEvent('click', false, false);
-        node.dispatchEvent(evt);  
+        node.dispatchEvent(evt);
       } else if( document.createEventObject ) {
-        node.fireEvent('onclick') ;  
+        node.fireEvent('onclick') ;
       } else if (typeof node.onclick === 'function' ) {
-        node.onclick();  
+        node.onclick();
       }
     },
     stopEventPropagation = function(e) {
@@ -435,7 +435,7 @@
         if (lastFocusedButton !== undefined) {
           lastFocusedButton.focus();
           lastFocusedButton = undefined;
-        }        
+        }
       }, 0);
     };
   };
@@ -561,7 +561,7 @@
   /*
    * Set hover, active and focus-states for buttons (source: http://www.sitepoint.com/javascript-generate-lighter-darker-color)
    */
-   
+
   function colorLuminance(hex, lum) {
     // Validate hex string
     hex = String(hex).replace(/[^0-9a-f]/gi, '');
