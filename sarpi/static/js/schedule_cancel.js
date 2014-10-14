@@ -10,7 +10,7 @@ $(function(){
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: '#4AA2E9',
-                confirmButtonText: 'Claro!',
+                confirmButtonText: 'Si!',
                 closeOnConfirm: false
             },
             function(){
@@ -20,10 +20,10 @@ $(function(){
                     setTimeout(function(){
                         swal("Genial", "Se canceló el horario deseado", "success");
                         setTimeout(function(){
-                            $('.confirm').trigger('click');
-                        },2000);
+                            $('.warning').trigger('click');
+                            location.reload();
+                        },1000);
                     },200);
-                    location.reload();
                 });
             });
         }
