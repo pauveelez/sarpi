@@ -14,6 +14,7 @@ celery.config_from_object('celeryconfig')
 from sarpi import sarpi, db
 from datetime import datetime, date
 from sarpi.models import Pet, PetWeight, Schedule, Owner
+from sarpi.middleware import feed_pet
 
 # Ver los estados de los horarios, los retorna en una lista
 def state_schedules(state):
@@ -65,6 +66,8 @@ def schedule_feed():
         if schedule.date_start == dateToday:
             timeSchedule = schedule.time_start.strftime('%H:%M:00')
             if timeSchedule == timeNow:
+                timeOn = schedule.portion
+                feed_pet(timeOn)
                 print 'Codigo SARpi GPIO'
                 # Se actualiza el state de to_do a done ya que se cumplio con el horario
                 change_state(schedule.id, 'done')

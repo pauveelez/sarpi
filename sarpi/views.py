@@ -5,7 +5,7 @@ from sarpi import sarpi, db, lm
 from forms import LoginForm, EditFormPet, EditFormOwner, ProgramSchedule, CreateReport
 from datetime import datetime, date
 from models import Pet, PetWeight, Schedule, Owner
-from middleware import create_pdf, choises_hours
+from middleware import create_pdf, choises_hours, feed_pet
 # Para subir las imagenes
 from werkzeug import secure_filename
 from config import UPLOAD_FOLDER, PDF_FOLDER, PDF_DOWNLOAD
@@ -104,7 +104,8 @@ def index():
 def ajax_feed():
     if request.method == 'POST':
         seconds = request.form['seconds']
-        print 'Holaaaaaaa'+seconds
+        print 'ON '+seconds
+        feed_pet(seconds)
         return 'here come de code'
 
     return 'Hi Code for FeedMeNow - Nothing to do here'
